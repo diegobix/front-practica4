@@ -3,6 +3,7 @@ import { Fragment } from "preact/jsx-runtime";
 import Axios from "npm:axios";
 import Lover from "../components/Lover.tsx";
 import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
+import { useState } from "preact/hooks";
 
 type LoverT = {
   _id: string;
@@ -41,7 +42,9 @@ export const handler: Handlers = {
   },
 };
 
-const LoversPage = (props: PageProps<{ pageData: LoverT[] | PokemonT[] }>) => {
+const LoversPage = (
+  props: PageProps<{ pageData: LoverT[] | PokemonT[] }>,
+) => {
   const lovers = props.data.pageData;
   const partLength = lovers.length / 3;
   const firstPart = lovers.slice(0, partLength);
@@ -60,7 +63,7 @@ const LoversPage = (props: PageProps<{ pageData: LoverT[] | PokemonT[] }>) => {
       </div>
       <div class="columns">
         <div class="column column-reverse">
-          {secondPart.map((lover) => (
+          {secondPart.map((lover, n) => (
             <Lover
               image={(lover as any).photo
                 ? (lover as LoverT).photo
@@ -70,22 +73,22 @@ const LoversPage = (props: PageProps<{ pageData: LoverT[] | PokemonT[] }>) => {
           ))}
         </div>
         <div class="column">
-          {firstPart.map((lover) => (
+          {firstPart.map((lover, n) => (
             <Lover
               image={(lover as any).photo
                 ? (lover as LoverT).photo
                 : (lover as PokemonT).image}
-              key={lover._id}
+              key={n}
             />
           ))}
         </div>
         <div class="column column-reverse">
-          {thirdPart.map((lover) => (
+          {thirdPart.map((lover, n) => (
             <Lover
               image={(lover as any).photo
                 ? (lover as LoverT).photo
                 : (lover as PokemonT).image}
-              key={lover._id}
+              key={n}
             />
           ))}
         </div>

@@ -1,4 +1,4 @@
-import Start from "../islands/start.tsx";
+import StartComp from "../islands/StartComp.tsx";
 
 export type Tpokemon = {
   _id: string;
@@ -8,7 +8,7 @@ export type Tpokemon = {
 };
 
 const Home = () => {
-  return <Start />;
+  return <StartComp />;
 };
 
 export default Home;
